@@ -275,8 +275,8 @@ function r3s4(){const mean=(n,lo,hi)=>{let a;do{a=Array.from({length:n},()=>ri(l
   return [
   num("Kinoabende im Monat bei 4 Freunden: Bestimmt das <b>arithmetische Mittel</b>.",sum(a)/4,{fig:list(a),tip1:"Das arithmetische Mittel verteilt die Gesamtzahl gleichmäßig auf alle.",tip2:"Ihr braucht die Summe aller Werte und die Anzahl der Werte."}),
   num("Punkte in 5 Spielrunden: Bestimmt das <b>arithmetische Mittel</b>.",sum(b)/5,{fig:list(b),tip1:"Addiert zuerst alle Punkte.",tip2:"Teilt die Summe durch die Anzahl der Runden – wie viele Runden sind es?"}),
-  num("Körpergröße von 6 Kindern in cm: Bestimmt das <b>arithmetische Mittel</b> und rundet auf <b>eine Stelle nach dem Komma</b>.",Math.round(sum(c)/6*10)/10,{fig:list(c),unit:"cm",tol:.051,tip1:"Ihr dürft den Taschenrechner benutzen. Wie viele Werte sind es?",tip2:"Prüft eure Summe noch einmal und rundet erst ganz am Ende."}),
-  num("Laufzeiten über 50 m in Sekunden: Bestimmt das <b>arithmetische Mittel</b> (auf eine Stelle nach dem Komma gerundet).",Math.round(sum(d)/5*10)/10,{fig:list(d.map(nf)),unit:"s",tol:.051,tip1:"Kommazahlen werden genauso addiert – achtet auf die Kommas.",tip2:"Gebt die Werte im Taschenrechner mit Punkt statt Komma ein, wenn er das verlangt."})]}
+  num("Körpergröße von 6 Kindern in cm: Bestimmt das <b>arithmetische Mittel</b> und rundet auf <b>eine Stelle nach dem Komma</b>.",sum(c)/6,{fig:list(c),unit:"cm",dec:1,tip1:"Ihr dürft den Taschenrechner benutzen. Wie viele Werte sind es?",tip2:"Prüft eure Summe noch einmal und rundet erst ganz am Ende."}),
+  num("Laufzeiten über 50 m in Sekunden: Bestimmt das <b>arithmetische Mittel</b> (auf eine Stelle nach dem Komma gerundet).",sum(d)/5,{fig:list(d.map(nf)),unit:"s",dec:1,tip1:"Kommazahlen werden genauso addiert – achtet auf die Kommas.",tip2:"Gebt die Werte im Taschenrechner mit Punkt statt Komma ein, wenn er das verlangt."})]}
 
 /* ================= RAUM 4: Daten vergleichen und bewerten ================= */
 function r4s1(){let a,b;do{a=Array.from({length:5},()=>ri(4,10));b=Array.from({length:5},()=>ri(2,12))}while(sum(a)%5||sum(b)%5||sum(a)===sum(b)||(Math.max(...a)-Math.min(...a))===(Math.max(...b)-Math.min(...b)));
@@ -294,7 +294,7 @@ function r4s2(){const n=4,m=ri(3,5);let a;do{a=Array.from({length:n},()=>ri(1,6)
   num(`Fünf Kinder haben im Mittel <b>${av} Minuten</b> am Tag gelesen. Wie viele Minuten haben sie <b>zusammen</b> gelesen?`,5*av,{unit:"min",tip1:"Das Mittel ist entstanden, indem man die Summe durch die Anzahl geteilt hat.",tip2:"Denkt rückwärts: Was muss man mit dem Mittel machen, um die Summe zu bekommen?"}),
   num(`Ben hat in 5 Tests im Mittel die Note <b>${m}</b>. Vier Noten kennt ihr. Welche Note hatte er im <b>fünften Test</b>?`,5*m-sum(a),{fig:list(a.concat(["?"])),tip1:"Wie groß muss die Summe aller fünf Noten sein?",tip2:"Vergleicht die nötige Summe mit der Summe der vier bekannten Noten."}),
   num(`Ein Influencer will in 4 Wochen im Mittel <b>${mm} neue Follower</b> pro Woche. In den ersten 3 Wochen waren es diese Werte. Wie viele braucht er in Woche 4?`,need,{fig:list(pts.concat(["?"])),tip1:"Bestimmt zuerst, wie viele Follower es in allen 4 Wochen zusammen sein müssen.",tip2:"Zieht davon ab, was er schon hat."}),
-  num(`In einer Gruppe von <b>${g}</b> Kindern beträgt das mittlere Taschengeld <b>${av} €</b> im Monat. Ein neues Kind mit <b>${av+g+1} €</b> kommt dazu. Wie groß ist das neue arithmetische Mittel? (auf eine Stelle nach dem Komma)`,Math.round((g*av+av+g+1)/(g+1)*10)/10,{unit:"€",tol:.051,tip1:"Bestimmt zuerst die Summe des Taschengelds der ursprünglichen Gruppe.",tip2:"Addiert das neue Taschengeld und teilt durch die neue Anzahl der Kinder."})]}
+  num(`In einer Gruppe von <b>${g}</b> Kindern beträgt das mittlere Taschengeld <b>${av} €</b> im Monat. Ein neues Kind mit <b>${av+g+1} €</b> kommt dazu. Wie groß ist das neue arithmetische Mittel? (auf eine Stelle nach dem Komma)`,(g*av+av+g+1)/(g+1),{unit:"€",dec:1,tip1:"Bestimmt zuerst die Summe des Taschengelds der ursprünglichen Gruppe.",tip2:"Addiert das neue Taschengeld und teilt durch die neue Anzahl der Kinder."})]}
 function r4s3(){const thema=pick([["Geschwister","Anzahl der Geschwister","Geschwistern","ihren Geschwistern"],["Haustiere","Anzahl der Haustiere","Haustieren","ihren Haustieren"],["Bücher","gelesene Bücher im Monat","Büchern","der Anzahl gelesener Bücher im Monat"]]);
   let c;do{c=[ri(1,6),ri(3,9),ri(2,8),ri(1,5)]}while(new Set(c).size<4||mode([0,0,0,0].flatMap((_,k)=>Array(c[k]).fill(k)))===null);
   const tot=sum(c),m=c.indexOf(Math.max(...c)),mean=(c[1]+2*c[2]+3*c[3])/tot;
@@ -303,7 +303,7 @@ function r4s3(){const thema=pick([["Geschwister","Anzahl der Geschwister","Gesch
   num(`In einer Klasse wurden die Kinder nach <b>${thema[3]}</b> gefragt. Wie viele Kinder wurden <b>insgesamt</b> befragt?`,tot,{fig:T,tip1:"In der unteren Zeile steht, wie viele Kinder die jeweilige Antwort gegeben haben.",tip2:"Ihr braucht alle Kinder – addiert die ganze untere Zeile."}),
   num(`Bestimmt den <b>Modalwert</b> der ${thema[1]}.`,m,{fig:T,tip1:"Der Modalwert ist ein Wert aus der oberen Zeile, nicht eine Anzahl von Kindern.",tip2:"Sucht in der unteren Zeile die größte Zahl. Welcher Wert steht darüber?"}),
   num(`Wie viele ${thema[0]} haben alle befragten Kinder <b>zusammen</b>?`,c[1]+2*c[2]+3*c[3],{fig:T,tip1:"Ein Kind mit 2 ${thema[2]} zählt doppelt, ein Kind mit 3 ${thema[2]} dreifach.",tip2:"Rechnet für jede Spalte: Wert mal Anzahl der Kinder. Dann alles addieren."}),
-  num(`Bestimmt das <b>arithmetische Mittel</b> (auf eine Stelle nach dem Komma gerundet).`,Math.round(mean*10)/10,{fig:T,tol:.051,tip1:"Ihr kennt schon die Summe aller Werte und die Anzahl der Kinder.",tip2:"Teilt die Gesamtzahl durch die Anzahl der befragten Kinder – nicht durch 4."})]}
+  num(`Bestimmt das <b>arithmetische Mittel</b> (auf eine Stelle nach dem Komma gerundet).`,mean,{fig:T,dec:1,tip1:"Ihr kennt schon die Summe aller Werte und die Anzahl der Kinder.",tip2:"Teilt die Gesamtzahl durch die Anzahl der befragten Kinder – nicht durch 4."})]}
 function r4s4(){const a=ri(52,58),b=a+ri(2,4);
   const trunc=barSVG(["Kanal A","Kanal B"],[a,b],{step:2,max:60,min:50,w:360,h:240,ytitle:"Tsd."});
   const ok=barSVG(["Kanal A","Kanal B"],[a,b],{step:10,max:60,w:360,h:240,ytitle:"Tsd."});
@@ -399,11 +399,17 @@ function parseNum(s){s=String(s).trim().replace(/\s+/g,"").replace(/[−–]/g,"
 function check(id){const st=S.st[id],t=st.ts[st.i],inp=$("#ans");
   if(!inp.value.trim()){$("#fb").innerHTML=`<div class="fb tip"><b class="t">Noch leer</b>Gebt zuerst eine Zahl ein.</div>`;inp.focus();return}
   const v=parseNum(inp.value);
-  if(isFinite(v)&&Math.abs(v-t.ans)<=t.tol){beep(true);inp.readOnly=true;inp.classList.add("right");$("#check").hidden=true;success(id,"");return}
-  inp.classList.add("wrongv");setTimeout(()=>inp.classList.remove("wrongv"),900);wrong(t,Number.isNaN(v)?"Bitte gebt nur eine Zahl ein (Kommazahlen mit Komma).":"Das stimmt noch nicht.");inp.focus();inp.select()}
-function wrong(t,msg){beep(false);S.mistakes++;t.fails++;
+  /* Rundungsregel: nur das richtig gerundete Ergebnis zählt */
+  let ok,rnd=false;
+  if(t.dec!==undefined){const f=10**t.dec,exp=Math.round(t.ans*f+1e-9)/f;ok=isFinite(v)&&Math.abs(v-exp)<1e-9;
+    if(!ok&&isFinite(v)&&(Math.abs(Math.abs(v-exp)-1/f)<1e-9||Math.abs(v-t.ans)<1/f))rnd=true}
+  else ok=isFinite(v)&&Math.abs(v-t.ans)<=t.tol;
+  if(ok){beep(true);inp.readOnly=true;inp.classList.add("right");$("#check").hidden=true;success(id,"");return}
+  inp.classList.add("wrongv");setTimeout(()=>inp.classList.remove("wrongv"),900);wrong(t,Number.isNaN(v)?"Bitte gebt nur eine Zahl ein (Kommazahlen mit Komma).":rnd?"Fast! Überprüft eure Rundung.":"Das stimmt noch nicht.",rnd);inp.focus();inp.select()}
+function wrong(t,msg,rnd){beep(false);S.mistakes++;t.fails++;
   let h=`<div class="fb wrong"><b class="t">Nicht ganz</b>${msg}</div>`;
-  if(t.fails===1)h+=`<div class="fb tip" style="margin-top:10px"><b class="t">Hinweis</b>${t.tip1}</div>`;
+  if(rnd&&t.fails<3)h+=`<div class="fb tip" style="margin-top:10px"><b class="t">Hinweis</b>Euer Rechenweg stimmt wahrscheinlich – schaut euch die Stelle nach der gerundeten Stelle noch einmal genau an.</div>`;
+  else if(t.fails===1)h+=`<div class="fb tip" style="margin-top:10px"><b class="t">Hinweis</b>${t.tip1}</div>`;
   else if(t.fails===2)h+=`<div class="fb tip" style="margin-top:10px"><b class="t">Noch ein Hinweis</b>${t.tip2}</div>`;
   else h+=`<div class="fb help" style="margin-top:10px"><b class="t">Holt euch Hilfe</b>Ihr könnt zum Beispiel einen Mitschüler oder eure Lehrerin oder euren Lehrer fragen.</div>`;
   $("#fb").innerHTML=h;if(t.fails===3)showHelper()}
